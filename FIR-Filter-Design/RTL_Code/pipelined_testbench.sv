@@ -13,7 +13,6 @@ module pipelined_testbench();
 	logic signed[39:0] outp;
 	logic signed[39:0] outp_max;
 	
-	real num_samples;
 	real magnitude, radians, s;
 	
 	// Instantiate DUT
@@ -26,14 +25,12 @@ module pipelined_testbench();
 		inp = 16'b0;
 		radians = 0;
 		
-		// start the frequency tests
 		for (int i = 1; i < 27; i++) begin
-			
-			rad = real'((real'(i) * real'(2*3.141592654)) / real'(27));
-			s = $sin(rad);
+			#1000;
+			radians = real'((real'(i) * real'(2*3.141592654)) / real'(27));
+			s = $sin(radians);
 			inp = 16'($rtoi(s * real'(2**16)));
-			
-			// wait for all taps to finish
+
 			repeat (340) @(posedge clk);
 			
 			outp_max = outp;
@@ -42,22 +39,21 @@ module pipelined_testbench();
 				 if (outp > outp_max) outp_max = outp;
 			end
 
-			magnitude = real'(20) * $log10($itor(outp_max) * (1/real'(2**14)));
+			magnitude = $log10($itor(outp_max) * (1/real'(2**14))) *  real'(20);
 			
-			// display maximum output magnitude in dB for each frequency test
 			$display("Section: %f | Max Magnitude Out: %f", real'(real'(i)/ real'(27)), magnitude);
 			
-			#1000;
 		end
 
-		#100; 
+		#5; 
 		$stop;
 		
 	end
 	
+	// clock frequency
 	always #500 clk = ~clk;
 	
-	// always check for a new max
+	// update max logic
 	always @(posedge clk) begin
 		for (int i = 0; i < 27; i++) begin
 			if (outp > outp_max) begin 
