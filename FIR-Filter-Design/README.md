@@ -26,7 +26,9 @@ The main function of the MATLAB code simply calls the "design_my_filter" functio
 Finally, the of the list quantized coefficients is exported as a SystemVerilog file for use in the hardware implementation of the filter, discussed in a later section.
 
 ## Filter Frequency Response
-
+Figure 1 below shows the filter frequency response of the original (un-quantized) filter:
+<img width="734" alt="image" src="https://github.com/rokarn12/Advanced-VLSI-Design/assets/66972178/e1e8e243-6305-46de-b5d5-40acc5b7ae2b">
+** Figure 1: Filter Frequency Response of Un-Quantized Filter **
 
 ## Hardware Implementation
 ### Architecture
