@@ -40,7 +40,17 @@ The following figure shows the filter frequency response of the quantized filter
 
 **Figure 2: Filter Frequency Response of Quantized Filter**
 
+This quantized filter still follows the specifications of transition region of 0.2&pi; - 0.23&pi; rad/sample and stopband attenuation of 80 dB, but now there is some performance dropoff in the larger frequency ranges. This is an acceptable tradeoff for the implementation of this FIR filter.
+
+
 ## Hardware Implementation
+The RTL code for the hardware implementation of the designed FIR filter is written in SystemVerilog. Currently, this repository contains code for two configurations of the FIR filter:
+
+1. Pipelined FIR Filter
+2. 2-Parallel FIR Filter with Pipelining
+
+After the MATLAB script is run, a new SystemVerilog file (fir_params.sv) is generated that contains the number of taps (NUM_TAPS) necessary for the desired functionality of the FIR filter and a list of 16-bit wide filter coefficients (fir_coefs). The number of taps needed for this filter is 170.
+
 ### Architecture
 
 ### Code Structure
