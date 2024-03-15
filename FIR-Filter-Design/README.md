@@ -76,6 +76,12 @@ The next configuration of the filter that was implemented was the 2-parallel fil
 
 The H0, H1, and H0+H1 blocks in Figure 4 are implemented as the N-tap pipelined filter from Figure 3. Since this is a 2-parallel architecture, H0, H1, and H0+H1 are instantiated as (NUM_TAPS/2)-tap filters: 170/2 = 85 so these subfilters are 85-tap. The parallel architecture improves throughput for the FIR filter, and the pipelined nature of the subfilters serve the same purpose as well.
 
+3-parallel FIR Filter
+
+<img width="587" alt="image" src="https://github.com/rokarn12/Advanced-VLSI-Design/assets/66972178/f527f91d-4077-4529-8dc0-ba1b3429a8f1">
+
+**Figure 5: Reduced Complexity 3-Parallel FIR (from Part 4 Lecture Slides, Slide 9)**
+
 ### Code Structure - Pipelined Filter
 The SystemVerilog code for the pipelined FIR filter is found in the file "fir_filter.sv". Since the fir_filter module is used as both the standalone pipelined filter AND as subfilters in the parallel architecture, it must be implemented using a configurable number of taps and different coefficient lists. The parameter "sub_taps" is defaulted to 0 and stays at 0 when the module is being used as the standalone pipelined filter. If sub_taps is greater than 0, that indicates that the module is being used as a subfilter. Before any implementation, the code checks the value of sub_taps and implements the filter accordingly.
 
