@@ -27,8 +27,18 @@ Finally, the of the list quantized coefficients is exported as a SystemVerilog f
 
 ## Filter Frequency Response
 Figure 1 below shows the filter frequency response of the original (un-quantized) filter:
+
 <img width="734" alt="image" src="https://github.com/rokarn12/Advanced-VLSI-Design/assets/66972178/e1e8e243-6305-46de-b5d5-40acc5b7ae2b">
-** Figure 1: Filter Frequency Response of Un-Quantized Filter **
+
+**Figure 1: Filter Frequency Response of Un-Quantized Filter**
+
+This filter shows an ideal representation of the specified FIR filter, which as shown, has a transition region of 0.2&pi; - 0.23&pi; rad/sample and stopband attenuation of 80 dB. However, this response is a fully ideal response and may not be realizable through actual hardware implementation as it would consume inefficiently large amounts of area and power. Therefore, quantization is necessary to establish a balance between performance and resource utilization.
+
+The following figure shows the filter frequency response of the quantized filter:
+
+<img width="723" alt="image" src="https://github.com/rokarn12/Advanced-VLSI-Design/assets/66972178/c171c965-5710-4d15-beab-fa39af5e0ab3">
+
+**Figure 2: Filter Frequency Response of Quantized Filter**
 
 ## Hardware Implementation
 ### Architecture
