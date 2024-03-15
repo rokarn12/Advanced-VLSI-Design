@@ -51,6 +51,13 @@ The RTL code for the hardware implementation of the designed FIR filter is writt
 
 After the MATLAB script is run, a new SystemVerilog file (fir_params.sv) is generated that contains the number of taps (NUM_TAPS) necessary for the desired functionality of the FIR filter and a list of 16-bit wide filter coefficients (fir_coefs). The number of taps needed for this filter is 170.
 
+### Overflow
+In this implementation, the inputs were chosen to be 16-bits wide, the coefficients were quantized to be 16-bits wide, and the output width was calculated to be 40 bits wide according to the following calculation to avoid overflow:
+
+Input Width + Coefficient Width + log2(NUM_TAPS) = 16 + 16 + log2(170) ~= 40
+
+This helps to ensure that the output width can accomodate for (properly represent) the potentially large values that the FIR filter may output.
+
 ### Architecture
 The first configuration of the FIR filter that was implemented was the pipelined filter with no parallelization. The architecture is drawn out as shown for "N" taps. In this actual implementation, N = 170 which is a 170-tap filter.
 
@@ -68,8 +75,10 @@ The next configuration of the filter that was implemented was the 2-parallel fil
 
 The H0, H1, and H0+H1 blocks in Figure 4 are implemented as the N-tap pipelined filter from Figure 3. Since this is a 2-parallel architecture, H0, H1, and H0+H1 are instantiated as (NUM_TAPS/2)-tap filters: 170/2 = 85 so these subfilters are 85-tap. The parallel architecture improves throughput for the FIR filter, and the pipelined nature of the subfilters serve the same purpose as well.
 
-
 ### Code Structure
+The SystemVerilog code for the pipelined FIR filter is found in the file "fir_filter.sv". Since the fir_filter module is used as both the standalone pipelined filter AND as subfilters in the parallel architecture, it must be implemented using a configurable number of taps and different coefficient lists. The parameter "sub_taps" is defaulted to 0 and stays at 0 when the module is being used as the standalone pipelined filter. If sub_taps is greater than 0, that indicates that the module is being used as a subfilter. Before any implementation, the code checks the value of sub_taps and implements the filter accordingly.
+
+The code initializes an array of delay elements which are used as the pipeline registers for all 170 stages. These delay elements store the product of the previous input sample and the corresponding filter coefficient. Then, in a loop, each previous delay element's output is multiplied by its corresponding coefficient and added to the current delay element's output. Finally, after processing all delay elements, the tap result is calculated by adding the output of the first delay element (delay_elements[1]) to the product of the input signal and the first coefficient (fir_coefs[0]*inp).
 
 ### Results
 
