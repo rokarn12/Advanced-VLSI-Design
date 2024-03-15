@@ -122,6 +122,7 @@ The code continuously checks for new maximum output values and updates the maxim
 Area, clock frequency, power estimation
 
 Pipelined FIR Filter:
+
     Worst-case setup slack: -1.011
     Worst-case hold slack: 0.148
     Worst-case minimum pulse width slack: -0.089
@@ -129,6 +130,7 @@ Pipelined FIR Filter:
     Power estimation: 355.38 mW
 
 2-Parallel FIR Filter (No Pipeline):
+
     Worst-case setup slack: 
     Worst-case hold slack: 
     Worst-case minimum pulse width slack: 
@@ -136,6 +138,7 @@ Pipelined FIR Filter:
     Power estimation: 
 
 2-Parallel FIR Filter (With Pipeline):
+
     Worst-case setup slack: 
     Worst-case hold slack: 
     Worst-case minimum pulse width slack: 
@@ -143,6 +146,7 @@ Pipelined FIR Filter:
     Power estimation: 
 
 3-Parallel FIR Filter (No Pipeline):
+
     Worst-case setup slack: 
     Worst-case hold slack: 
     Worst-case minimum pulse width slack: 
@@ -150,6 +154,7 @@ Pipelined FIR Filter:
     Power estimation: 
     
 3-Parallel FIR Filter (With Pipeline):
+
     Worst-case setup slack: 
     Worst-case hold slack: 
     Worst-case minimum pulse width slack: 
