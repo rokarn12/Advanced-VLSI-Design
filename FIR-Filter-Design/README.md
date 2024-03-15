@@ -9,13 +9,9 @@ MATLAB was used to generate the proper coefficients that the FIR filter would be
 Then, MATLAB code for a Filter Design Function was generated, which resulted in these parameters:
 
     Fpass = 0.2;             % Passband Frequency
-    
     Fstop = 0.23;            % Stopband Frequency
-    
     Dpass = 0.057501127785;  % Passband Ripple
-    
     Dstop = 0.0001;          % Stopband Attenuation
-    
     dens = 20;               % Density Factor
 
 Using these parameters, the order and coefficients of the FIR filter were generated using the "firpmord" and "firpm" functions.
