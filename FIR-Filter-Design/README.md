@@ -89,7 +89,11 @@ The output is assigned according to the architecture shown in Figure 4:
     y(2k+1) = y(1) = out_H0H1 - out_H0 - out_H1;
 
 ### Code Structure - Testbench
+The testbench for the pipelined and parallel implementation are essentially the same, the only difference being that for the parallel implementation, two outputs must be checked instead of one.
 
+The testbench simulates 27 different input stimuli to the FIR filter in the form of sine wave samples that are calculated to be different values at every clock cycle.
+
+The code continuously checks for new maximum output values and updates the maximum accordingly. In each of the 27 iterations, the magnitude (in decibels, dB) is calculated and displayed.
 
 ### Results
 
