@@ -75,10 +75,21 @@ The next configuration of the filter that was implemented was the 2-parallel fil
 
 The H0, H1, and H0+H1 blocks in Figure 4 are implemented as the N-tap pipelined filter from Figure 3. Since this is a 2-parallel architecture, H0, H1, and H0+H1 are instantiated as (NUM_TAPS/2)-tap filters: 170/2 = 85 so these subfilters are 85-tap. The parallel architecture improves throughput for the FIR filter, and the pipelined nature of the subfilters serve the same purpose as well.
 
-### Code Structure
+### Code Structure - Pipelined Filter
 The SystemVerilog code for the pipelined FIR filter is found in the file "fir_filter.sv". Since the fir_filter module is used as both the standalone pipelined filter AND as subfilters in the parallel architecture, it must be implemented using a configurable number of taps and different coefficient lists. The parameter "sub_taps" is defaulted to 0 and stays at 0 when the module is being used as the standalone pipelined filter. If sub_taps is greater than 0, that indicates that the module is being used as a subfilter. Before any implementation, the code checks the value of sub_taps and implements the filter accordingly.
 
 The code initializes an array of delay elements which are used as the pipeline registers for all 170 stages. These delay elements store the product of the previous input sample and the corresponding filter coefficient. Then, in a loop, each previous delay element's output is multiplied by its corresponding coefficient and added to the current delay element's output. Finally, after processing all delay elements, the tap result is calculated by adding the output of the first delay element (delay_elements[1]) to the product of the input signal and the first coefficient (fir_coefs[0]*inp).
+
+### Code Structure - 2-Parallel Filter
+The SystemVerilog code for the 2-parallel filter is found in the file "fir_parallel.sv". The parallel architecture instantiates 3 of the pipelined filter modules, and specifies the "sub_taps" parameter to be (NUM_TAPS/2) = 85. A function is created to generate the subfilter coefficients for H0 and H1, which is simply alternating coefficients from the original list. This function properly splits the original coefficient list into 2, which are fed into H0 and H1. For the H0+H1 filter, a small function that adds the H0 coefficients and H1 coefficients together is made and this list of sums is fed into the H0+H1 filter.
+
+The output is assigned according to the architecture shown in Figure 4:
+
+    y(2k) = y(0) = out_H1_delayed + out_H0;
+    y(2k+1) = y(1) = out_H0H1 - out_H0 - out_H1;
+
+### Code Structure - Testbench
+
 
 ### Results
 
