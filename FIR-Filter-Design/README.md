@@ -131,34 +131,34 @@ Pipelined FIR Filter:
 
 2-Parallel FIR Filter (No Pipeline):
 
-    Worst-case setup slack: 
-    Worst-case hold slack: 
-    Worst-case minimum pulse width slack: 
-    Logic utilization:  (Cyclone V Device)
-    Power estimation: 
+    Worst-case setup slack: 11.814
+    Worst-case hold slack: 0.035
+    Worst-case minimum pulse width slack: -2.225
+    Logic utilization: 11% (Cyclone V Device)
+    Power estimation: 356.92 mW
 
 2-Parallel FIR Filter (With Pipeline):
 
-    Worst-case setup slack: 
-    Worst-case hold slack: 
-    Worst-case minimum pulse width slack: 
-    Logic utilization:  (Cyclone V Device)
-    Power estimation: 
+    Worst-case setup slack: -1.824
+    Worst-case hold slack: 0.148
+    Worst-case minimum pulse width slack: -1.702
+    Logic utilization: 9% (Cyclone V Device)
+    Power estimation: 356.82 mW
 
 3-Parallel FIR Filter (No Pipeline):
 
-    Worst-case setup slack: 
-    Worst-case hold slack: 
-    Worst-case minimum pulse width slack: 
-    Logic utilization:  (Cyclone V Device)
-    Power estimation: 
+    Worst-case setup slack: -8.823
+    Worst-case hold slack: 0.065
+    Worst-case minimum pulse width slack: -2.225
+    Logic utilization: 19% (Cyclone V Device)
+    Power estimation: 358.28 mW
     
 3-Parallel FIR Filter (With Pipeline):
 
-    Worst-case setup slack: 
-    Worst-case hold slack: 
-    Worst-case minimum pulse width slack: 
-    Logic utilization:  (Cyclone V Device)
-    Power estimation: 
+    Worst-case setup slack: -1.624
+    Worst-case hold slack: 0.132
+    Worst-case minimum pulse width slack: -1.702
+    Logic utilization: 12% (Cyclone V Device)
+    Power estimation: 358.23 mW
     
 ## Conclusion
