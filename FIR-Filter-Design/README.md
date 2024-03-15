@@ -58,6 +58,17 @@ The first configuration of the FIR filter that was implemented was the pipelined
 
 **Figure 3: N-Tap Pipelined FIR Filter Architecture**
 
+Between each delay element (pipeline register), there is one multiplication and one addition that occurs, so the critical path of this design is the time of one multiplication plus the time of one addition. This allows for the design to be able to operate at high clock frequencies since the critical path is small. Since N = 170, after 170 clock cycles from the initial input, the correct output will be available.
+
+The next configuration of the filter that was implemented was the 2-parallel filter that uses the pipelined filter architecture described above. The architecture of the 2-parallel design is shown here:
+
+<img width="504" alt="image" src="https://github.com/rokarn12/Advanced-VLSI-Design/assets/66972178/ff39b6f3-facc-425c-8d8a-df7a864da0ad">
+
+**Figure 4: Reduced Complexity 2-Parallel FIR (from Part 4 Lecture Slides, Slide 8)**
+
+The H0, H1, and H0+H1 blocks in Figure 4 are implemented as the N-tap pipelined filter from Figure 3. Since this is a 2-parallel architecture, H0, H1, and H0+H1 are instantiated as (NUM_TAPS/2)-tap filters: 170/2 = 85 so these subfilters are 85-tap. The parallel architecture improves throughput for the FIR filter, and the pipelined nature of the subfilters serve the same purpose as well.
+
+
 ### Code Structure
 
 ### Results
