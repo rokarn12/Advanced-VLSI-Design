@@ -104,6 +104,13 @@ The output is assigned according to the architecture shown in Figure 4:
 ### Code Structure - 2-Parallel Filter (No Pipelining)
 The code for this module is also found in the "fir_parallel.sv" file, under the module named "fir_filter_no_pipeline". This module is essentially the same as the 2-parallel filter with pipelining, the only difference being that the modules used for the H0, H1, and H0+H1 blocks are non-pipelined FIR filters. Everything else is the same for this implementation.
 
+### Code Structure - 3-Parallel Filter (both Pipelining and No Pipelining)
+The code for both versions of the 3-parallel filter can be found in the "fir_3_parallel.sv" file. Because of the many internal logic operations (addition and subtraction) in the 3-parallel architecture, there are many internal logic signals that are declared to represent the many wires in Figure 5. These wires are then properly assigned.
+
+The 3-parallel code essentially uses the same structure as the 2-parallel code and also uses the same functions "generate_sub" and "merge". The list of coefficients are split up into three groups of equal size (using generate_sub) to be fed into H0, H1, and H2. Then, these groups are added together accordingly to H0+H1, H1+H2, and H0+H1+H2 using the merge function.
+
+Six subfilters are instantiated with the proper parameters and input/output ports. For the 3-parallel filter with pipelining, the pipelined versions of the FIR filter are instantiated. For the 3-parallel filter with NO pipelining, the non-pipelined versions of the FIR filter are instantiated.
+
 ### Code Structure - Testbench
 The testbench for the pipelined and parallel implementation are essentially the same, the only difference being that for the parallel implementation, two outputs must be checked instead of one.
 
