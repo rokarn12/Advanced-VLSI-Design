@@ -52,6 +52,11 @@ The RTL code for the hardware implementation of the designed FIR filter is writt
 After the MATLAB script is run, a new SystemVerilog file (fir_params.sv) is generated that contains the number of taps (NUM_TAPS) necessary for the desired functionality of the FIR filter and a list of 16-bit wide filter coefficients (fir_coefs). The number of taps needed for this filter is 170.
 
 ### Architecture
+The first configuration of the FIR filter that was implemented was the pipelined filter with no parallelization. The architecture is drawn out as shown for "N" taps. In this actual implementation, N = 170 which is a 170-tap filter.
+
+<img width="1020" alt="image" src="https://github.com/rokarn12/Advanced-VLSI-Design/assets/66972178/e18f0b73-8aa4-4684-ba07-73f6c3c57875">
+
+**Figure 3: N-Tap Pipelined FIR Filter Architecture**
 
 ### Code Structure
 
