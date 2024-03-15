@@ -121,4 +121,39 @@ The code continuously checks for new maximum output values and updates the maxim
 ### Results
 Area, clock frequency, power estimation
 
+Pipelined FIR Filter:
+    Worst-case setup slack: -1.011
+    Worst-case hold slack: 0.148
+    Worst-case minimum pulse width slack: -0.089
+    Logic utilization: 6% (Cyclone V Device)
+    Power estimation: 355.38 mW
+
+2-Parallel FIR Filter (No Pipeline):
+    Worst-case setup slack: 
+    Worst-case hold slack: 
+    Worst-case minimum pulse width slack: 
+    Logic utilization:  (Cyclone V Device)
+    Power estimation: 
+
+2-Parallel FIR Filter (With Pipeline):
+    Worst-case setup slack: 
+    Worst-case hold slack: 
+    Worst-case minimum pulse width slack: 
+    Logic utilization:  (Cyclone V Device)
+    Power estimation: 
+
+3-Parallel FIR Filter (No Pipeline):
+    Worst-case setup slack: 
+    Worst-case hold slack: 
+    Worst-case minimum pulse width slack: 
+    Logic utilization:  (Cyclone V Device)
+    Power estimation: 
+    
+3-Parallel FIR Filter (With Pipeline):
+    Worst-case setup slack: 
+    Worst-case hold slack: 
+    Worst-case minimum pulse width slack: 
+    Logic utilization:  (Cyclone V Device)
+    Power estimation: 
+    
 ## Conclusion
