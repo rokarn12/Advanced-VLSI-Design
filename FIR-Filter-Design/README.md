@@ -89,16 +89,17 @@ The output is assigned according to the architecture shown in Figure 4:
     y(2k) = y(0) = out_H1_delayed + out_H0;
     y(2k+1) = y(1) = out_H0H1 - out_H0 - out_H1;
 
-### Code Structure 2-Parallel Filter (No Pipelining)
+### Code Structure - 2-Parallel Filter (No Pipelining)
 The code for this module is also found in the "fir_parallel.sv" file, under the module named "fir_filter_no_pipeline". This module is essentially the same as the 2-parallel filter with pipelining, the only difference being that the modules used for the H0, H1, and H0+H1 blocks are non-pipelined FIR filters. Everything else is the same for this implementation.
 
 ### Code Structure - Testbench
 The testbench for the pipelined and parallel implementation are essentially the same, the only difference being that for the parallel implementation, two outputs must be checked instead of one.
 
-The testbench simulates 27 different input stimuli to the FIR filter in the form of sine wave samples that are calculated to be different values at every clock cycle.
+The testbench simulates 27 different input stimuli to the FIR filter in the form of sine wave samples that are calculated to be different values in every iteration.
 
 The code continuously checks for new maximum output values and updates the maximum accordingly. In each of the 27 iterations, the magnitude (in decibels, dB) is calculated and displayed.
 
 ### Results
+Area, clock frequency, power estimation
 
 ## Conclusion
