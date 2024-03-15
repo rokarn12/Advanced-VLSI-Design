@@ -44,10 +44,11 @@ This quantized filter still follows the specifications of transition region of 0
 
 
 ## Hardware Implementation
-The RTL code for the hardware implementation of the designed FIR filter is written in SystemVerilog. Currently, this repository contains code for two configurations of the FIR filter:
+The RTL code for the hardware implementation of the designed FIR filter is written in SystemVerilog. Currently, this repository contains code for three configurations of the FIR filter:
 
 1. Pipelined FIR Filter
-2. 2-Parallel FIR Filter with Pipelining
+2. 2-Parallel FIR Filter (No Pipelining)
+3. 2-Parallel FIR Filter with Pipelining
 
 After the MATLAB script is run, a new SystemVerilog file (fir_params.sv) is generated that contains the number of taps (NUM_TAPS) necessary for the desired functionality of the FIR filter and a list of 16-bit wide filter coefficients (fir_coefs). The number of taps needed for this filter is 170.
 
@@ -87,6 +88,9 @@ The output is assigned according to the architecture shown in Figure 4:
 
     y(2k) = y(0) = out_H1_delayed + out_H0;
     y(2k+1) = y(1) = out_H0H1 - out_H0 - out_H1;
+
+### Code Structure 2-Parallel Filter (No Pipelining)
+The code for this module is also found in the "fir_parallel.sv" file, under the module named "fir_filter_no_pipeline". This module is essentially the same as the 2-parallel filter with pipelining, the only difference being that the modules used for the H0, H1, and H0+H1 blocks are non-pipelined FIR filters. Everything else is the same for this implementation.
 
 ### Code Structure - Testbench
 The testbench for the pipelined and parallel implementation are essentially the same, the only difference being that for the parallel implementation, two outputs must be checked instead of one.
