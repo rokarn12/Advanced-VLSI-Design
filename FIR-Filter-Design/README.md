@@ -18,14 +18,10 @@ Using these parameters, the order and coefficients of the FIR filter were genera
 
 The main function of the MATLAB code simply calls the "design_my_filter" function to retrieve the list of filter coefficients. Then, quantization is done with the following parameters to MATLAB's "quantizenumeric" function:
 
-s = 1; <- data is signed
-
-w = 16; <- word length of quantized value
-
-f = 15; <- fraction length of quantized value
-
-r = 'nearest'; <- round towards nearest with ties rounding towards positive infinity
-
+    s = 1; <- data is signed
+    w = 16; <- word length of quantized value
+    f = 15; <- fraction length of quantized value
+    r = 'nearest'; <- round towards nearest with ties rounding towards positive infinity
 
 Finally, the of the list quantized coefficients is exported as a SystemVerilog file for use in the hardware implementation of the filter, discussed in a later section.
 
