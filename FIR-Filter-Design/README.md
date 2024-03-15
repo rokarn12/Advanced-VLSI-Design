@@ -80,7 +80,7 @@ The SystemVerilog code for the pipelined FIR filter is found in the file "fir_fi
 
 The code initializes an array of delay elements which are used as the pipeline registers for all 170 stages. These delay elements store the product of the previous input sample and the corresponding filter coefficient. Then, in a loop, each previous delay element's output is multiplied by its corresponding coefficient and added to the current delay element's output. Finally, after processing all delay elements, the tap result is calculated by adding the output of the first delay element (delay_elements[1]) to the product of the input signal and the first coefficient (fir_coefs[0]*inp).
 
-### Code Structure - 2-Parallel Filter
+### Code Structure - 2-Parallel Filter with Pipelining
 The SystemVerilog code for the 2-parallel filter is found in the file "fir_parallel.sv". The parallel architecture instantiates 3 of the pipelined filter modules, and specifies the "sub_taps" parameter to be (NUM_TAPS/2) = 85. A function is created to generate the subfilter coefficients for H0 and H1, which is simply alternating coefficients from the original list. This function properly splits the original coefficient list into 2, which are fed into H0 and H1. For the H0+H1 filter, a small function that adds the H0 coefficients and H1 coefficients together is made and this list of sums is fed into the H0+H1 filter.
 
 The output is assigned according to the architecture shown in Figure 4:
