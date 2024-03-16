@@ -1,6 +1,6 @@
 // Rojan Karn - FIR Parallel
 
-module parallel_2_filter (input clk,
+module fir_parallel (input clk,
 	input logic signed[15:0] inp[1:0],
 	output logic signed[39:0] outp[1:0]
 );
@@ -24,7 +24,7 @@ module parallel_2_filter (input clk,
 		assign outp[0] = out_H1_delayed + out_H0;
 		assign outp[1] = out_H0H1 - out_H0 - out_H1;
 		
-		assign accum_inp = {inp[0][15], inp[0]} + {inp[1][15], inp[1]}; // sign extend
+		assign accum_inp = {inp[0][15], inp[0]} + {inp[1][15], inp[1]}; // H0 + H1
 		
 		// can't make function returning unpacked array, must make typedef
 		typedef logic signed[15:0] subfs[0:(NUM_TAPS/2)-1];

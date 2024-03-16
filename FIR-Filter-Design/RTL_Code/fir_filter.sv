@@ -5,7 +5,9 @@
 // OUTPUT WIDTH = 16 + 16 + log2(170) ~= 40
 
 // Implements the pipelined FIR filter
-module fir_filter #(parameter int sub_taps = 0, parameter logic signed[15:0] sub_coefs[0:84] = '{default: '0})(
+// for 2-parallel: sub_coefs[0:84]
+// for 3-parallel: sub_coefs[0:55]
+module fir_filter #(parameter int sub_taps = 0, parameter logic signed[15:0] sub_coefs[0:55] = '{default: '0})(
     input clk,
     input logic signed[15:0] inp,
     output logic signed[39:0] outp // 16 + 16 + log2(170) = 40 bits wide for output
@@ -52,8 +54,9 @@ module fir_filter #(parameter int sub_taps = 0, parameter logic signed[15:0] sub
 	
 endmodule
 
-
-module fir_filter_no_pipeline #(parameter int sub_taps = 0, parameter logic signed[15:0] sub_coefs[0:84] = '{default: '0})(
+// for 2-parallel: sub_coefs[0:84]
+// for 3-parallel: sub_coefs[0:55]
+module fir_filter_no_pipeline #(parameter int sub_taps = 0, parameter logic signed[15:0] sub_coefs[0:55] = '{default: '0})(
     input clk,
     input logic signed[15:0] inp,
     output logic signed[39:0] outp // 16 + 16 + log2(170) = 40 bits wide for output
@@ -98,7 +101,7 @@ module fir_filter_no_pipeline #(parameter int sub_taps = 0, parameter logic sign
 			
 			// change assign of tap_res to be combinational
 			always_comb begin
-				tap_res = sub_coeffs[0] * inp;
+				tap_res = sub_coefs[0] * inp;
 				for (int j=1; j < sub_taps; j=j+1) tap_res = (sub_coefs[j] * delay_elements[j-1]) + tap_res;
 			end
 		
