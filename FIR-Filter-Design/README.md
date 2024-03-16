@@ -119,7 +119,9 @@ The testbench simulates 27 different input stimuli to the FIR filter in the form
 The code continuously checks for new maximum output values and updates the maximum accordingly. In each of the 27 iterations, the magnitude (in decibels, dB) is calculated and displayed.
 
 ### Results
-Area, clock frequency, power estimation
+Simulation results are shown in the "Simulation_Outputs" folder.
+
+Hardware Implementation Results related to area, clock frequency, and power estimation are listed in this section.
 
 Pipelined FIR Filter:
 
@@ -161,4 +163,12 @@ Pipelined FIR Filter:
     Logic utilization: 12% (Cyclone V Device)
     Power estimation: 358.23 mW
     
-## Conclusion
+## Analysis & Conclusion
+Clearly, there is a tradeoff between logic utilization and timing performance that is shown in the "Results" section above. Pipelined architectures enable fast execution times by processing data in stages, which at the same time causes a lot of resource usage due to the allocation of pipeline registers needed. On the other hand, non-pipelined architectures don't utilize as much logic resources, but they may fail to meet timing requirements.
+
+This tradeoff relationship is evident when comparing the pipelined vs. non-pipelined versions of the 2- and 3-parallel FIR filter implementations. The pipelined versions were faster at the cost of consuming more logic resources.
+
+One notable metric is the power estimation for all of these configurations, as they seemed to remain relatively constant between the different designs. What this means for the designer is that power is not much of a concern when deciding on an architecture for the design.
+
+The optimal FIR filter design choice depends on the application that it is needed for. If logic utilization is the main concern, then it seems that the non-pipelined architecture is the better fit. However, if timing performance is the main concern, the designer should choose the pipelined architecture to maximize clock frequency.
+
